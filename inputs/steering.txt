@@ -1,2 +1,176 @@
+&InFiles
+  ! Number of intput files
+    NInputFiles = 7
+
+  ! Input files:
+
+    InputFileNames =
 
 
+  !********!
+  !  HERA  !
+  !********!
+
+  ! HERA I+II combined inclusive DIS:
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_NCep_920-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_NCep_820-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_NCep_575-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_NCep_460-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_NCem-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_CCep-thexp.dat',
+  'datafiles/hera/h1zeusCombined/inclusiveDis/1506.06042/HERA1+2_CCem-thexp.dat',
+
+  !****************!
+  !  Tevatron      !
+  !****************!
+
+  ! NuSea DY
+  'datafiles/tevatron/e866/dy/0103030/tab11.dat',
+
+  ! NuTeV dimuon cross-sections
+  'datafiles/tevatron/NuTeV/0102049/NuTeV_data.dat',
+
+  ! D0 Z production:
+  'datafiles/tevatron/d0/wzProduction/0702025/D0_Z_Boson_Rapidity-thexp.dat',
+
+  !*******!
+  !  LHC  !
+  !*******!
+  ! ATLAS Dec 2016 W,Z:
+  'datafiles/lhc/atlas/wzProduction/1612.03016/wminus-thexp.dat',
+  'datafiles/lhc/atlas/wzProduction/1612.03016/wplus-thexp.dat',
+  'datafiles/lhc/atlas/wzProduction/1612.03016/zypeak_cc-thexp.dat',
+
+  ! CMS 7 TeV jets
+  'datafiles/lhc/cms/jets/1212.6660/CMS_IncJets2011_QCD_11_004-thexp.dat'
+
+  ! LHCb 7TeV W, Z cross-sections
+  'datafiles/lhc/lhcb/wzProduction/1212.4620/LHCB_7TeV_Zee_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Zmm_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Wplusmunu_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Wminusmunu_rap.dat',
+
+  ! LHCb 8TeV W, Z cross-sections
+  'datafiles/lhc/lhcb/wzProduction/1503.00963/LHCB_8TeV_Zee_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1511.08039/LHCB_8TeV_Zmm_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1511.08039/LHCB_8TeV_Wplusmunu_rap.dat',
+  'datafiles/lhc/lhcb/wzProduction/1511.08039/LHCB_8TeV_Wminusmunu_rap.dat',
+
+&End
+
+&InCorr
+  ! Number of correlation (statistical, systematical or full) files
+    NCorrFiles = 4
+
+  ! Correlation files:
+  CorrFileNames = 'datafiles/lhc/cms/jets/1212.6660/CMS_IncJets2011_QCD_11_004___QCD_11_004.corr',
+                  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Zmm_rap___LHCB_7TeV_Zmm_rap.dat',
+                  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Wminusmunu_rap___LHCB_7TeV_Wminusmunu_rap.dat',
+                  'datafiles/lhc/lhcb/wzProduction/1505.07024/LHCB_7TeV_Wplusmunu_rap___LHCB_7TeV_Wplusmunu_rap.dat'
+&End
+
+&ReduceSyst
+    ! even with tolerance =0 the following flag may speed up calculations
+  do_reduce = .false.  ! turn-on to simplify/speedup chi2 calculation.
+    ! tolerance = 0.0 for exact calculation, > 0.0 for improved speed.
+  tolerance = 0.0
+    ! depending on blas library, toggling the following flag may improve chi2 computation speed:
+  useBlas = .false.
+&End
+
+&ReduceSyst
+    ! even with tolerance =0 the following flag may speed up calculations
+  do_reduce = .false.  ! turn-on to simplify/speedup chi2 calculation.
+    ! tolerance = 0.0 for exact calculation, > 0.0 for improved speed.
+  tolerance = 0.0
+    ! depending on blas library, toggling the following flag may improve chi2 computation speed:
+  useBlas = .false.
+&End
+
+&CovarToNuisance
+   ! Global switch for using nuisance param representation for covariance mat.
+  LConvertCovToNui = .False.
+
+   ! Tolerance -- zero means exact transformation
+  Tolerance = 0.0
+
+   ! (Optional) -- try to subtract diagonal stat. uncertainties from total covariance when determining uncorrelated uncertainites
+  LSubtractStat = .false.
+
+   ! The following lines allow to adjust error scaling properties (default: :M)
+  DataName     = 'CMS electon Asymmetry rapidity', 'CMS W muon asymmetry'
+  DataSystType = ':A', ':A'
+&End
+
+*
+* (Optional) List systematic sources, modify their scaling properties:
+*
+&Systematics
+ !C      List sources, Results.txt file would list them first. Use the usual :A, :P,
+ !C      qualifiers to change the scalling properties
+ !  ListOfSources = 'ATLAS_lumi2010', 'ATL_WZ2010_Source_13:A'
+ !C      Modify the prior in chi2 definition (1.0 is default):
+ !  PriorScaleName = 'ATLAS_lumi2010', 'ATL_WZ2010_Source_13'
+ !  PriorScaleFactor = 0.0, 0.0
+&End
+
+*
+* Main steering cards
+*
+&xFitter
+ ! XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ !
+ ! Chi2 definition. Following options are supported:
+ !
+ ! -- Bias corrections for uncertainties --
+ ! 'StatScale'    :  'Poisson',  'NoRescale' ( see also 'ExtraSystRescale' below )
+ ! 'UncorSysScale':  'Poisson',  'Linear',  'NoRescale'
+ ! 'CorSysScale'  :  'Linear',   'NoRescale'
+ !
+ ! -- Treatment of systematics in chi2 ---
+ ! 'UncorChi2Type':  'Diagonal'
+ ! 'CorChi2Type'  :  'Hessian', 'Matrix', 'Offset'
+ !
+ ! -- Extra corrections ---
+ !   are given as comma separated list for Chi2ExtraParam, they are off by default.
+ !  'PoissonCorr'            : extra log correction accounting for changing uncertainties
+ !  'FirstIterationRescale' : re-scale uncertainties at the first iteration only
+ !  'ExtraSystRescale'      : additional re-scaling of stat. uncertainty to account for syst. shifts.
+
+   CHI2SettingsName = 'StatScale', 'UncorSysScale', 'CorSysScale', 'UncorChi2Type', 'CorChi2Type'
+   Chi2Settings     = 'Poisson'  , 'Linear',        'Linear'     , 'Diagonal'     , 'Hessian'
+   Chi2ExtraParam = 'PoissonCorr'
+
+ ! Debug flag
+  LDEBUG     = False
+
+
+ ! Quadratic approximation for asymmetric uncertainties
+ ! AsymErrorsIterations = 10
+&End
+
+*
+* (Optional) MC errors steering cards
+*
+&MCErrors
+  ! Activate MC method for error estimation if lRand = True
+  lRAND   = True
+
+  ! Use data (true, default) or theory (false) for the central values of the MC replica
+  lRANDDATA = True
+
+  ! MC method Seed
+  ISeedMC = 123456
+
+  ! --- Choose what distribution for the random number generator
+  ! STATYPE (SYS_TYPE)  =   1  gauss
+  ! STATYPE (SYS_TYPE)  =   2  uniform
+  ! STATYPE (SYS_TYPE)  =   3  lognormal
+  ! STATYPE (SYS_TYPE)  =   4  poisson (only for lRANDDATA = False !)
+  !
+  ! STATYPE = SYS_TYPE = 0 with lRANDDATA = False and lRAND   = True yeilds in substitution of data by theory (useful for sensitivi\
+ty tests)
+  !
+  STATYPE =  1
+  SYSTYPE =  1
+&End
