@@ -1,6 +1,6 @@
 # xfitter-toys
 
-A collection of code and scripts to generate and analyse pseudo-data (toys) with the xFitter program.
+A collection of code and scripts to generate and analyse pseudo-data (toys) with the [xFitter](https://gitlab.cern.ch/fitters/xfitter) program.
 
 Patch xfitter to modify default structure of output files (easier to parse)
 
