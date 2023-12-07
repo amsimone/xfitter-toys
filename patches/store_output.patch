@@ -1,0 +1,79 @@
+diff --git a/src/store_output.f b/src/store_output.f
+index 4a1c980f..3a53c565 100644
+--- a/src/store_output.f
++++ b/src/store_output.f
+@@ -162,12 +162,12 @@ c        open(82,file=h1name)
+ 
+ 
+             chm = 0.0d0
+-            if (q2.gt.qc.and.abs(pdf(-4)).gt.1D-50) then
++            if (q2.gt.qc) then
+                chm=pdf(-4)
+             endif
+ 
+             bot = 0.d0
+-            if (q2.gt.qb.and.abs(pdf(-5)).gt.1D-50) then
++            if (q2.gt.qb) then
+                bot=pdf(-5)
+             endif
+ 
+@@ -288,14 +288,10 @@ C--------------------------------------------------
+       integer GetBinIndex
+ 
+       open(90,file=TRIM(OutDirName)//'/fittedresults.txt')
+-      write(90,*)ndatasets
++      write(90,*) 'NDatasets=',ndatasets
+ 
+       PreviousPlots = 0
+ C Update theory errors, sum up what is already in and theory sources
+-      do i=1,NPoints
+-         THEO_TOT_UP(i) = 0
+-         THEO_TOT_DOWN(i) = 0
+-      enddo
+       do i=1,NPoints
+          do j=1,NSys
+             if (ISystType(j).eq.iTheorySyst) then
+@@ -318,12 +314,13 @@ C Update theory errors, sum up what is already in and theory sources
+          enddo
+       enddo
+[amoroso@naf-cms11]~/cmsarea/xfitter-patchtoys% git diff > store_output.patch
+[amoroso@naf-cms11]~/cmsarea/xfitter-patchtoys% less store_output.patch 
+
+ 
+@@ -331,9 +328,9 @@ c         write(90,*) '     q2          x        y    data     +- uncorr.err'//
+ c     &        '   +-toterr      theory      pull     dataset  '
+ 
+          write (90,17) (DATASETBinNames(j,i),j=1,3),'data    '
+-     $        ,' +- uncor  ',' +- tot   ',' th orig   ','th mod'
+-     $        , ' therr+   ', 'therr-'
+-     $        , ' pull   ', 'iset', 'iplot'
++     $, ' uncor  ',' tot   ',' th_orig   ','th_mod'
++     $, ' therr+   ', 'therr-'
++     $, ' pull   ', 'iset', 'iplot'
+  17      format(1X,11(A11,1X),A4,A12)
+ 
+          do j=1,NDATAPOINTS(i)
+@@ -378,6 +375,7 @@ cv
+ c            write(44,111) VQ2(index),VX(index), f2sh(index),flsh(index),
+ c     &           xf3sh(index)
+          enddo
++         write(90,*) 'ENDDATASET'
+ cv         write(34,*), index,i,DATASETNUMBER(i)
+       enddo
+   111  format(1X, F10.3, 2X, F12.6, 2X, 3(F12.6,2X))
+@@ -437,7 +435,6 @@ c RP         write (fname,'(''output/parsout_'',i1)') ifcn3
+ !     endif
+ 
+       do i=1,mne
+-         parname = ""
+          call mnpout(i,parname,val,err,xlo,xhi,ipar)
+ 
+ C
+@@ -534,7 +531,6 @@ C store the optimal values
+ 
+       open (71,file=TRIM(OutDirName)//'/parseout_opt',status='unknown')
+       do i=1,mne
+-         parname = ""
+          call mnpout(i,parname,val,err,xlo,xhi,ipar)
+          if (Trim(parname).ne.'undefined') then
+             if (xlo.eq.0.and.xhi.eq.0) then
