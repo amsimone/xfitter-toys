@@ -7,10 +7,9 @@
   IndexDataset = 507
   Reaction = 'CC pp'
 
-  TermName = 'A','K'
-  TermSource = 'APPLgrid','KFactor'
-  TermInfo = 'GridName=datafiles/lhc/atlas/wzProduction/1612.03016/grid-40-6-15-3-Wplus_wyl.root','FileName=datafiles/lhc/atlas/wzProduction/1612.03016/kf.wplus.txt:FileColumn=3'
-  TheorExpr = 'K*A/1000'
+  TermName = 'D'
+  TermSource = 'Dummy'
+  TheorExpr = 'D'
 
   NData = 11
   NColumn = 138
