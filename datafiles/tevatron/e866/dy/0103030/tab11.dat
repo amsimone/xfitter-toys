@@ -1,0 +1,42 @@
+*
+* dSigma/dx2 cross section.
+*
+* Data from  arXiv:hep-ex/0103030
+*
+&DATA
+ Reaction = 'NC pp'
+ Name = 'E866 Table11'
+ Ndata  = 15
+ NColumn   = 9
+ ColumnType = 'Flag', 6*'Bin','Sigma','Error'
+ ColumnName = 'binFlag', 'x2min','x2max','x2','xF','Pt','M','Sigma','stat'
+ PERCENT = F
+
+ TermName = 'D'
+ TermSource = 'Dummy'
+ TheorExpr = 'D'
+
+&END
+
+&PlotDesc
+ PlotN = 1
+ PlotDefColumn = 'x2'
+ PlotDefValue = 0., 5.
+ PlotOptions(1)  = 'Experiment:E866@ExtraLabel:pp, pd->#mu#mu high mass; E_0= 800GeV; high mass@Title: 4.5 < M_{#mu#mu} < 9.0; 10.7 < M_{#mu#mu} @XTitle: x2 @YTitle: #sigma^{pd}/2/#sigma{pp} '
+&End
+* x2min x2max  x2    xF     Pt   M   Sigma   Err
+1 0.015 0.030 0.026 0.534 1.004 4.6 1.038 0.022 
+1 0.030 0.045 0.038 0.415 1.045 5.1 1.056 0.011 
+1 0.045 0.060 0.052 0.356 1.076 5.6 1.081 0.010 
+1 0.060 0.075 0.067 0.326 1.103 6.2 1.086 0.011 
+1 0.075 0.090 0.082 0.296 1.122 6.8 1.118 0.013 
+1 0.090 0.105 0.097 0.261 1.141 7.2 1.116 0.015 
+1 0.105 0.120 0.112 0.227 1.156 7.5 1.115 0.018 
+1 0.120 0.135 0.127 0.199 1.168 7.8 1.161 0.023 
+1 0.135 0.150 0.142 0.182 1.161 8.2 1.132 0.027 
+1 0.150 0.175 0.161 0.164 1.156 8.7 1.124 0.027 
+1 0.175 0.200 0.186 0.146 1.146 9.5 1.144 0.038 
+1 0.200 0.225 0.211 0.133 1.146 10.3 1.091 0.047 
+1 0.225 0.250 0.236 0.120 1.178 11.1 1.039 0.063 
+1 0.250 0.300 0.269 0.097 1.177 12.0 0.935 0.067 
+1 0.300 0.350 0.315 0.046 1.078 12.9 0.729 0.124
